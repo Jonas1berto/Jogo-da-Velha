@@ -55,9 +55,9 @@ const ResetGame = () => {
 
 <template>
   <main class="pt-8 text-center">
-    <h1 class="mb-8 text-3xl font-bold uppercase">Tic Tac Toe</h1>
+    <h1 class="mb-8 text-3xl font-bold uppercase">Jogo da Velha</h1>
 
-    <h3 class="text-xl mb-4">Player {{ player }}'s turn</h3>
+    <h3 class="text-xl mb-4">Turno do Player: <span :class="` ${player === 'X' ? 'text-purple-800' : 'text-green-500'}`">{{ player }}</span>  </h3>
 
     <div class="flex flex-col items-center mb-8">
       <div v-for="(row, x) in board" :key="x" class="flex">
@@ -66,16 +66,28 @@ const ResetGame = () => {
           :key="y"
           @click="MakeMove(x, y)"
           :class="`border border-white w-24 h-24 hover:bg-gray-700 flex items-center justify-center material-icons-outlined text-4xl cursor-pointer ${
-            cell === 'X' ? 'text-pink-500' : 'text-blue-400'
+            cell === 'X' ? 'text-purple-800' : 'text-green-500'
           }`"
-        ></div>
+        >
+      {{ cell === 'X' ? 'close' : cell === 'O' ? 'circle' : ''}}
+      </div>
       </div>
     </div>
+
+    <h2 v-if="winner" class="text-6x1 font-bold mb-8">
+      Jogador <span :class="` ${winner === 'X' ? 'text-purple-800' : 'text-green-500' } `"> {{ winner }}</span> venceu!
+    </h2>
+
+    <button @click="ResetGame" class="px-4 py-2 bg-green-900 rounded uppercase font-bold hover:bg-green-700 duration-100">Reset Game</button>
   </main>
 </template>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap%27');
 html {
-  background: rgb(68, 68, 68);
+  background: #1f2937;
+  color: #fff;
+  font-family: 'Press Start 2P', cursive !important;
+ 
 }
 </style>
